@@ -13,10 +13,22 @@
     <canvas id="glCanvas"></canvas>
     <div class="menu">
         <h1 class="whiteShape">Lucas Lelièvre</h1>
-        <p><a href="" class="whiteShape">Pouet</a></p>
-        <p><a href="" class="whiteShape">Projets</a></p>
-        <p><a href="" class="whiteShape">CV</a></p>
-        <p><a href="" class="whiteShape">Contact</a></p>
+        <p>
+            <a href="#" class="whiteShape" id="pouet">Pouet</a>
+        </p>
+        <p>
+            <a href="#" class="whiteShape" id="projets">Projets</a>
+            <a href="https://github.com/LucasLelievre" target="_blank" class="whiteShape projetsInner">github</a>
+        </p>
+        <p>
+            <a href="#" class="whiteShape" id="cv">CV</a>
+            <a href="#" class="whiteShape cvInner">dl</a>
+        </p>
+        <p>
+            <a href="#" class="whiteShape" id="contact">Contact</a>
+            <a href="#" class="whiteShape contactInner" id="mail">LELIEVRE.lUCAS13@GMAIL.COM</a>
+            <a href="#" class="whiteShape contactInner" id="linkedin">linkedin</a>
+        </p>
     </div>
 </body>
 
@@ -32,14 +44,14 @@
     uniform vec2 i_res;
     uniform vec2 i_mouse;
     void main(){
-        vec2 r=i_res;
-        vec2 p=(gl_FragCoord.xy*2.-r)/min(r.x,r.y)-(i_mouse/500.);
-        for(int i=0;i<8;++i){
-            p.xy=abs(p)/abs(dot(p,p))-vec2(.9+cos(i_time*.2)*.4);
-        }
-        gl_FragColor=vec4(p.xxx,1);
+        vec2 p = gl_FragCoord.xy/min(i_res.x,i_res.y);
+        float r = (sin(i_time)+1.)/2.;
+        float g = gl_FragCoord.x/i_res.x;
+        float b = (i_mouse.y*-1.+i_res.y)/i_res.y;
+        gl_FragColor=vec4(r, g, b,1);
     }
 </script>
+<script src="assets/js/webGlCanvas.js"></script>
 <script src="assets/js/main.js"></script>
 
 </html>

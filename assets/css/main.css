@@ -7,15 +7,16 @@ body {
     display: block;
     /* position: relative; */
 }
+canvas {
+    position: absolute;
+}
 h1 {
     font-family: CODElight;
 }
 a {
     color: black;
     text-decoration: none;
-}
-canvas {
-    position: absolute;
+    width: fit-content;
 }
 .menu {
     z-index: 1;
@@ -24,6 +25,16 @@ canvas {
     font-size: x-large;
     font-family: CODEbold;
 }
+.whiteShape {
+    background-color: white;
+    width: fit-content;
+    padding: 5px;
+    padding-bottom: 0px;
+    border-radius: 5px;
+}
+/* .whiteShape:hover {
+    background-color: darkslategrey;
+} */
 
 @font-face {
     font-family: CODEbold;

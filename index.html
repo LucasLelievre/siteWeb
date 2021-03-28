@@ -20,6 +20,26 @@
     </div>
 </body>
 
+<script type="glsl" id="VERT_SOURCE">
+    attribute vec3 coordinates;
+    void main(void) {
+        gl_Position = vec4(coordinates, 1.0);
+    }
+</script>
+<script type="glsl" id="FRAG_SOURCE">
+    precision highp float;
+    uniform float i_time;
+    uniform vec2 i_res;
+    uniform vec2 i_mouse;
+    void main(){
+        vec2 r=i_res;
+        vec2 p=(gl_FragCoord.xy*2.-r)/min(r.x,r.y)-(i_mouse/500.);
+        for(int i=0;i<8;++i){
+            p.xy=abs(p)/abs(dot(p,p))-vec2(.9+cos(i_time*.2)*.4);
+        }
+        gl_FragColor=vec4(p.xxx,1);
+    }
+</script>
 <script src="assets/js/main.js"></script>
 
 </html>

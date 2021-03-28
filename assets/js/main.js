@@ -58,23 +58,9 @@ function mouseMove() {
 }
 
 function initShader(glContext) {
-    // Shader source code
-    const vertSource = `
-        attribute vec3 coordinates;
-        void main(void) {
-            gl_Position = vec4(coordinates, 1.0);
-        }`;
-    const fragSource =
-        `precision highp float;
-        uniform float time;
-        void main(){
-          vec2 r=vec2(400, 200);
-          vec2 p=(gl_FragCoord.xy*2.-r)/min(r.x,r.y)-r/100.;
-          for(int i=0;i<8;++i){
-            p.xy=abs(p)/abs(dot(p,p))-vec2(.9+cos(time*.2)*.4);
-          }
-          gl_FragColor=vec4(p.xxx,1);
-        }`;
+
+    const vertSource = document.getElementById("VERT_SOURCE").textContent;
+    const fragSource = document.getElementById("FRAG_SOURCE").textContent;
 
     // Creating shader object
     const vertShader = glContext.createShader(glContext.VERTEX_SHADER);

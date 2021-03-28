@@ -1,32 +1,31 @@
 function main() {
-    console.log("window loaded.");
-    console.log("initializing canvas.");
-
     // the canvas that will be drawn on
     canvas = document.querySelector("#glCanvas");
     // GL context
     glContext = canvas.getContext("webgl");
-
     if (!glContext) {
         alert("Unable to initialize WebGL. Your browser maybe too old.");
         //TODO quelque chose pour les navigateurs trop vieux
         return;
     }
+    // set the canvas and viwport size to the window and add an event listener to resizeif needed
     resizeViewport();
     window.addEventListener("resize", resizeViewport);
-    canvas.addEventListener("mousemove", (e) => mouseMove(e), false);
+    // set the mouse position and listen to mouse movements
+    mousePos = [window.innerWidth/2, window.innerHeight/2];
+    window.addEventListener("mousemove", (e) => mouseMove(e), false);
 
     shaderProgram = initShader(glContext);
     initBuffer(glContext, shaderProgram);
 
-    oldTime = 0.0;
-    deltaTime = 0.0;
+    //oldTime = 0.0;
+    //deltaTime = 0.0;
     requestAnimationFrame(update);
 }
 
 function update(now) {
-    deltaTime = now - oldTime;
-    oldTime = now;
+    //deltaTime = now - oldTime;
+    //oldTime = now;
     render(now);
 
     requestAnimationFrame(update);
@@ -40,7 +39,10 @@ function render(now) {
 
     glContext.clear(glContext.COLOR_BUFFER_BIT | glContext.DEPTH_BUFFER_BIT);
 
-    glContext.uniform1f(glContext.getUniformLocation(shaderProgram, "time"), now*0.001);
+    // Fragment shaders input values
+    glContext.uniform1f(glContext.getUniformLocation(shaderProgram, "i_time"), now*0.001);
+    glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "i_res"), window.innerWidth, window.innerHeight);
+    glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "i_mouse"), mousePos[0], mousePos[1]);
 
     glContext.drawElements(glContext.TRIANGLES, indices.length, glContext.UNSIGNED_SHORT, 0);
 }
@@ -50,11 +52,11 @@ function resizeViewport() {
     canvas.height = window.innerHeight;
     glContext.viewport(0, 0, glContext.canvas.width, glContext.canvas.height);
     //this.renderer.resize();
-    console.log("resized");
 }
 
-function mouseMove() {
-    console.log("mouse move");
+function mouseMove(e) {
+    mousePos = [e.clientX, e.clientY];
+    //glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "i_mouse"), e.clientX, e.clientY);
 }
 
 function initShader(glContext) {
@@ -144,9 +146,6 @@ function initBuffer(glContext, shaderProgram) {
     glContext.vertexAttribPointer(coord, 3, glContext.FLOAT, false, 0, 0);
     // Enable the attribute
     glContext.enableVertexAttribArray(coord);
-
-    var time = glContext.getUniformLocation(shaderProgram, "time");
-
 }
 
 window.onload = main;

@@ -18,16 +18,16 @@
         </p>
         <p>
             <a href="#" class="whiteShape" id="projets">Projets</a>
-            <a href="https://github.com/LucasLelievre" target="_blank" class="whiteShape projetsInner">github</a>
+            <a href="https://github.com/LucasLelievre" target="_blank" class="whiteShape projetsInner">github<img src="assets/fonts/open_iconic/external-link.svg" alt="mail icon" class="icon"></a>
         </p>
         <p>
             <a href="#" class="whiteShape" id="cv">CV</a>
-            <a href="#" class="whiteShape cvInner">dl</a>
+            <a href="#" class="whiteShape cvInner">dl<img src="assets/fonts/open_iconic/data-transfer-download.svg" alt="mail icon" class="icon"></a>
         </p>
         <p>
             <a href="#" class="whiteShape" id="contact">Contact</a>
-            <a href="#" class="whiteShape contactInner" id="mail">LELIEVRE.lUCAS13@GMAIL.COM</a>
-            <a href="#" class="whiteShape contactInner" id="linkedin">linkedin</a>
+            <a href="mailto:lelievre.lucas13@gmail.com" class="whiteShape contactInner" id="mail">LELIEVRE.lUCAS13@GMAIL.COM<img src="assets/fonts/open_iconic/envelope-closed.svg" alt="mail icon" class="icon"></a>
+            <a href="#" class="whiteShape contactInner" id="linkedin">linkedin<img src="assets/fonts/open_iconic/external-link.svg" alt="mail icon" class="icon"></a>
         </p>
     </div>
 </body>
@@ -44,13 +44,27 @@
     uniform vec2 i_res;
     uniform vec2 i_mouse;
     void main(){
+        //vec2 p=(gl_FragCoord.xy*2.-i_res)/min(i_res.x,i_res.y)+(vec2(-1., -1.));
+        vec2 p = (gl_FragCoord.xy*2.-i_res)/min(i_res.x,i_res.y);
+        for(int i=0;i<8;++i){
+            p.xy=abs(p)/abs(dot(p,p))-vec2(.9+cos(i_time*.4)*.7);
+        }
+        gl_FragColor=vec4(p.x, p.x, p.y,1);
+    }
+</script>
+<!-- <script type="glsl" id="FRAG_SOURCE">
+    precision highp float;
+    uniform float i_time;
+    uniform vec2 i_res;
+    uniform vec2 i_mouse;
+    void main(){
         vec2 p = gl_FragCoord.xy/min(i_res.x,i_res.y);
         float r = (sin(i_time)+1.)/2.;
         float g = gl_FragCoord.x/i_res.x;
         float b = (i_mouse.y*-1.+i_res.y)/i_res.y;
         gl_FragColor=vec4(r, g, b,1);
     }
-</script>
+</script> -->
 <script src="assets/js/webGlCanvas.js"></script>
 <script src="assets/js/main.js"></script>
 

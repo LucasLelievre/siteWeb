@@ -40,9 +40,9 @@ function render(now) {
     glContext.clear(glContext.COLOR_BUFFER_BIT | glContext.DEPTH_BUFFER_BIT);
 
     // Fragment shaders input values
-    glContext.uniform1f(glContext.getUniformLocation(shaderProgram, "i_time"), now*0.001);
-    glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "i_res"), window.innerWidth, window.innerHeight);
-    glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "i_mouse"), mousePos[0], mousePos[1]);
+    glContext.uniform1f(glContext.getUniformLocation(shaderProgram, "u_time"), now*0.001);
+    glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "u_resolution"), window.innerWidth, window.innerHeight);
+    glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "u_mouse"), mousePos[0], mousePos[1]);
 
     glContext.drawElements(glContext.TRIANGLES, indices.length, glContext.UNSIGNED_SHORT, 0);
 }

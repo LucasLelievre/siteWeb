@@ -19,33 +19,39 @@ a {
     width: fit-content;
 }
 .whiteShape {
+    display: inline-block;
     background-color: white;
     width: fit-content;
     padding: 5px;
     padding-bottom: 0px;
     border-radius: 5px;
-    margin-right: 15px;
+    margin-right: 1em;
+    margin-bottom: 1em;
 }
 .menu {
     z-index: 1;
     position: relative;
     padding: 5%;
-    font-size: x-large;
-    font-family: CODEbold;
+    font-size: 1.5em;
+    font-family: CODEbold, 'monospace';
 }
+/* .menuSection {
+    margin-bottom: 5%;
+} */
 .contactInner, .cvInner, .projetsInner {
     display: none;
-    /* font-family: 'Courier New', Courier, monospace; */
 }
 #mail {
-    /* font-family: 'Courier New', Courier, monospace; */
-    font-size: x-large;
+    font-family: monospace;
     font-weight: bold;
 }
 .icon {
-    height: 0.72em;
+    height: 0.7em;
     width: auto;
     margin-left: 3px;
+}
+.icon #mail {
+    color: red;
 }
 
 @font-face {

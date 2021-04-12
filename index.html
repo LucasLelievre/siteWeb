@@ -19,7 +19,7 @@
         </div>
         <div class="menuSection">
             <a href="#" class="whiteBox" id="cv"><div class="fra locale">CV</div><div class="eng locale">Resume</div></a>
-            <a href="assets/LucasLelievreCV.pdf" class="whiteBox cvInner"><div class="fra locale">télécharger</div><div class="eng locale">download</div><img src="assets/fonts/open_iconic/data-transfer-download.svg" alt="mail icon" class="icon"></a>
+            <a href="assets/LucasLelievreCV.pdf" target="_blank" class="whiteBox cvInner"><div class="fra locale">télécharger</div><div class="eng locale">download</div><img src="assets/fonts/open_iconic/data-transfer-download.svg" alt="mail icon" class="icon"></a>
         </div>
         <div class="menuSection">
             <a href="#" class="whiteBox" id="contact">Contact</a>
@@ -71,42 +71,6 @@
         //gl_FragColor = vec4(vec3(u_mouse.x/u_resolution.x), 1.0);
     }
 </script>
-<!-- <script type="glsl" id="FRAG_SOURCE">
-    //uniform sampler1D tex;
-    //uniform vec2 center;
-    //uniform float scale;
-    //uniform int iter;
-    precision highp float;
-    uniform vec2 i_res;
-    uniform float i_time;
-
-    void main() {
-        vec2 z, c;
-
-        //vec2 center = i_res/(i_time);
-        //float scale = (i_res.x/i_res.y)/i_time;
-        vec2 center = (i_res/2.)/i_res + vec2(1.5, 0);
-        float scale = 0.001;
-        const int iter = 20;
-
-        c.x = 1.3333 * (gl_FragCoord.x - 0.5) * scale - center.x;
-        c.y = (gl_FragCoord.y - 0.5) * scale - center.y;
-
-        int j;
-        z = c;
-        for(int i=0; i<iter; ++i) {
-            j = i;
-            float x = (z.x * z.x - z.y * z.y) + c.x;
-            float y = (z.y * z.x + z.x * z.y) + c.y;
-
-            if((x * x + y * y) > 4.0) break;
-            z.x = x;
-            z.y = y;
-        }
-        gl_FragColor = vec4(vec3(float(j) / float(iter)), 1);
-        //gl_FragColor = texture1D(tex, (i == iter ? 0.0 : float(i)) / 100.0);
-    }
-</script> -->
 <!-- <script type="glsl" id="FRAG_SOURCE">
     precision highp float;
     uniform float i_time;

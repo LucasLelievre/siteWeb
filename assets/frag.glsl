@@ -5,16 +5,17 @@ precision highp float;
 
     void main() {
         vec2 FC = vec2(gl_FragCoord.xy);
-        vec2 r = u_resolution*3.;
+        vec2 r = u_resolution;
         float t = u_time;
         vec4 o = gl_FragColor;
 
         //vec2 zoomPos = vec2(-0.7454,-.113);
-        vec2 zoomPos = (vec2(u_mouse.x*-1., u_mouse.y)/u_resolution)*2. + vec2(1.,-1.);
-        //vec2 zoomPos = vec2(1.,-1.);
+        //vec2 zoomPos = (vec2(u_mouse.x*-1., u_mouse.y)/u_resolution)*2. + vec2(4., 0.7);
+        //vec2 zoomPos = vec2(0, 0);
+
         // Zoom
         //vec2 p = (FC.xy*2.-r) / r.y / exp(5.-cos(t)*6.) + zoomPos;
-        vec2 p = (FC.xy*2.-r) / r.y / exp(5.-1.*6.) + zoomPos;
+        vec2 p = (FC.xy*2.-r) / r.y / exp(5.-1.*6.);
 
         // Matrices as complex numbers, mat2(x,-y,y,x) is x + iy
         mat2 C = mat2(p.x,-p.y,p.y,p.x);

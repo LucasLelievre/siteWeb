@@ -25,4 +25,24 @@ document.getElementById("contact").onclick = function () {
     });
 };
 
+document.getElementById("flagLocale").onclick = function () {
+    Array.from(document.getElementsByClassName("locale")).forEach(e => {
+        if (e.style.display !== "none")
+            e.style.display = "none";
+        else
+            e.style.display = "inline-block";
+    });
+    Array.from(document.getElementsByClassName("flag")).forEach(e => {
+        if (e.style.display !== "none")
+            e.style.display = "none";
+        else
+            e.style.display = "inline-block";
+    });
+}
+
+Array.from(document.getElementsByClassName("eng")).forEach(e => {
+    e.style.display = "none";
+});
+document.getElementById("fraFlag").style.display = "none";
+
 window.onload = webGLCanvas;

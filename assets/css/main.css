@@ -18,7 +18,7 @@ a {
     text-decoration: none;
     width: fit-content;
 }
-.whiteShape {
+.whiteBox {
     display: inline-block;
     background-color: white;
     width: fit-content;
@@ -41,6 +41,9 @@ a {
 .contactInner, .cvInner, .projetsInner {
     display: none;
 }
+.locale {
+    display: inline-block;
+}
 #mail {
     font-family: monospace;
     font-weight: bold;
@@ -49,6 +52,9 @@ a {
     height: 0.7em;
     width: auto;
     margin-left: 3px;
+}
+.flag {
+    height: 1.3em;
 }
 .icon #mail {
     color: red;

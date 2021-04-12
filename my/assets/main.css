@@ -1,0 +1,38 @@
+body {
+    background-color: black;
+}
+a {
+    color: black;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.section {
+    text-align: center;
+    padding: 5%;
+    font-size: 1.5em;
+    font-family: CODEbold, 'monospace';
+}
+
+.whiteBox {
+    text-align: center;
+    display: inline-block;
+    background-color: white;
+    padding: 5px;
+    padding-bottom: 0px;
+    border-radius: 5px;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+.logo {
+    margin: auto;
+    margin-bottom: 0.25em;
+    display: block;
+    height: 3em;
+}
+
+@font-face {
+    font-family: CODEbold;
+    src: url(fonts/CODE\ Bold.otf);
+}

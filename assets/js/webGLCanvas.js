@@ -13,7 +13,10 @@ function webGLCanvas() {
     window.addEventListener("resize", resizeViewport);
     // set the mouse position and listen to mouse movements
     mousePos = [window.innerWidth/2, window.innerHeight/2];
+    if (isOnDesktop(navigator.userAgent||navigator.vendor||window.opera)) {
+        //todo set mousePos to mouse pos
     window.addEventListener("mousemove", (e) => mouseMove(e), false);
+    }
 
     shaderProgram = initShader(glContext);
     initBuffer(glContext, shaderProgram);

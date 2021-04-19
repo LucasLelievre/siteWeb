@@ -38,7 +38,7 @@ a {
 /* .menuSection {
     margin-bottom: 5%;
 } */
-.contactInner, .cvInner, .projetsInner {
+.menuContent {
     display: none;
 }
 .locale {

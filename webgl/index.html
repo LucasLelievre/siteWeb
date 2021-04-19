@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas Lelièvre</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+
+<body>
+    <canvas id="glCanvas"></canvas>
+    <div class="menu">
+        <h1 class="whiteBox">Lucas Lelièvre</h1>
+        <div class="menuSection">
+            <a href="#" class="whiteBox menuButton"><img src="../assets/fonts/open_iconic/arrow-thick-left.svg" alt="arrow-thick-left" class="icon"></a>
+            <a href="#" class="whiteBox">WebGL Shaders</a>
+        </div>
+        <div class="whiteBox menuSection fra locale">
+            <img src="../assets/fonts/open_iconic/warning.svg" alt="warning" class="icon"> Attention, ces animations sont faites pour s'executer avec une carte graphique.<br>
+            Si votre ordinateur n'en possède pas, votre navigateur risque de ralentir considérablement<br>
+            et devenir inutilisable jusqu'à la fermeture de l'onglet.
+        </div>
+        <div class="whiteBox menuSection eng locale">
+            <img src="../assets/fonts/open_iconic/warning.svg" alt="warning" class="icon"> Warning, These animations were made to run with a GPU.<br>
+            If your computer does not own one, your browser may drasticly slow down<br>
+            and become unusable until the tab is closed.
+        </div>
+        <div class="menuSection">
+            <a href="#" class="whiteBox">glowing mandelbrot set</a>
+        </div>
+        <div class="menuSection">
+            <a href="#" class="whiteBox" id="flagLocale"><img src="../assets/fonts/openmoji/uk.svg" alt="english" class="flag" id="engFlag"><img src="../assets/fonts/openmoji/fr.svg" alt="français" class="flag" id="fraFlag"></a>
+        </div>
+    </div>
+</body>
+
+<script type="glsl" id="VERT_SOURCE">
+    attribute vec3 coordinates;
+    void main(void) {
+        gl_Position = vec4(coordinates, 1.0);
+    }
+</script>
+<script type="glsl" id="FRAG_SOURCE">
+    precision mediump float;
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    uniform vec2 u_time;
+
+    void main() {
+        gl_FragColor = vec4(vec2(u_mouse/u_resolution.y), 0.0, 1.0);
+    }
+</script>
+<script src="../assets/js/webGlCanvas.js"></script>
+<script src="../assets/js/main.js"></script>
+
+</html>

@@ -19,11 +19,16 @@ Array.from(document.getElementsByClassName("flagLocale")).forEach(e => {
             else
                 e.style.display = "inline-block";
         });
+        console.log(e.id);
+        console.log(document.cookie);
+        document.cookie = "locale=" + e.id + ";";
     }
 });
-Array.from(document.getElementsByClassName("eng")).forEach(e => {
+var locale = "eng";
+console.log(document.cookie);
+if (document.cookie != null) locale = document.cookie.split(';').find(row => row.startsWith('locale=')).split('=')[1];
+Array.from(document.getElementsByClassName(locale)).forEach(e => {
     e.style.display = "none";
 });
-
 
 window.onload = webGLCanvas;

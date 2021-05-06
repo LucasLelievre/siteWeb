@@ -47,10 +47,10 @@
             </a>
         </div>
         <div class="menuSection">
-            <a href="#" class="whiteBox flagLocale locale fra">
+            <a href="#" class="whiteBox flagLocale locale fra" id="fra">
                 <img src="assets/fonts/openmoji/uk.svg" alt="english" class="flag" id="engFlag">
             </a>
-            <a href="#" class="whiteBox flagLocale locale eng">
+            <a href="#" class="whiteBox flagLocale locale eng" id="eng">
                 <img src="assets/fonts/openmoji/fr.svg" alt="français" class="flag" id="fraFlag">
             </a>
         </div>
@@ -64,6 +64,51 @@
     }
 </script>
 <script type="glsl" id="FRAG_SOURCE">
+    precision mediump float;
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    uniform float u_time;
+
+    #define PI 3.1415
+
+    void main() {
+        vec2 center = vec2(u_resolution.x/4., u_resolution.y/2.);
+        vec3 colour = vec3(0.5);
+        vec2 coord = vec2(mod(gl_FragCoord.x, center.x*2.), gl_FragCoord.y);
+        
+        //distance to center
+        float d = length(coord - center);
+        float time = u_time*10.0;
+        if (d < center.x/2.49) {
+            if (gl_FragCoord.x > u_resolution.x/2.) {
+                time -= PI/4.;
+            } else {
+                time += PI/4.;
+            }
+        }
+        if (d > center.x/1.505) {
+            if (gl_FragCoord.x > u_resolution.x/2.) {
+                time += PI/4.;
+            } else {
+                time -= PI/4.;
+            }
+        }
+        
+        if (d < center.x/1.5 && d > center.x/2.5) {
+            vec2 a = vec2(sin(time), cos(time));
+            vec2 b = vec2(sin(time+PI/2.), cos(time+PI/2.));
+            vec2 point = coord - center;
+            
+            if (sign(dot(point, a)) == sign(dot(point, b))) {
+                colour = vec3(0.99, 0.77, 0.18);
+            } else {
+                colour = vec3(0., 0.22, 0.8);
+            }
+        }
+        gl_FragColor = vec4(colour, 1.0);
+    }
+</script>
+<!-- <script type="glsl" id="FRAG_SOURCE">
     precision highp float;
     uniform vec2 u_resolution;
     uniform vec2 u_mouse;
@@ -90,7 +135,7 @@
             }
         }
     }
-</script>
+</script> -->
 <script src="assets/js/webGlCanvas.js"></script>
 <script src="assets/js/main.js"></script>
 

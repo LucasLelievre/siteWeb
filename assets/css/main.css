@@ -28,6 +28,17 @@ a {
     margin-right: 1em;
     margin-bottom: 1em;
 }
+.blackBox {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    width: fit-content;
+    padding: 5px;
+    padding-bottom: 0px;
+    border-radius: 5px;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
 .menu {
     z-index: 1;
     position: relative;

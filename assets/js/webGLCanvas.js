@@ -1,3 +1,6 @@
+//var oldTime = 0.0;
+//var deltaTime = 0.0;
+
 function webGLCanvas() {
     // the canvas that will be drawn on
     canvas = document.querySelector("#glCanvas");
@@ -21,16 +24,14 @@ function webGLCanvas() {
     shaderProgram = initShader(glContext);
     initBuffer(glContext, shaderProgram);
 
-    //oldTime = 0.0;
-    //deltaTime = 0.0;
+    
     requestAnimationFrame(update);
 }
 
 function update(now) {
+    render(now);
     //deltaTime = now - oldTime;
     //oldTime = now;
-    render(now);
-
     requestAnimationFrame(update);
 }
 

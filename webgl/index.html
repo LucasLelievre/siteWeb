@@ -57,10 +57,10 @@
     precision mediump float;
     uniform vec2 u_resolution;
     uniform vec2 u_mouse;
-    uniform vec2 u_time;
+    uniform float u_time;
 
     void main() {
-        gl_FragColor = vec4(vec2(u_mouse/u_resolution.y), 0.0, 1.0);
+        gl_FragColor = vec4(vec2(u_mouse/u_resolution.y), abs(sin(u_time)), 1.0);
     }
 </script>
 <script src="../assets/js/webGlCanvas.js"></script>

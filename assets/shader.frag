@@ -3,6 +3,8 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
+#define PI 3.1415
+
 void mandelbrotV1(){
     vec2 FC=vec2(gl_FragCoord.xy);
     vec2 r=u_resolution;
@@ -56,36 +58,41 @@ void colourMouse(){
     gl_FragColor=vec4(vec2(u_mouse/u_resolution.y),cos(u_time),1.);
 }
 
-#define PI 3.1415
-
 void opticalCircles1(){
-    vec3 colour=vec3(.5);
+    vec3 colour=vec3(0.5);
 
-    vec2 center=vec2(u_resolution.x/4.,u_resolution.y/2.);
-    vec2 FragCoord=vec2(mod(gl_FragCoord.x,center.x*2.),gl_FragCoord.y);
-    
-    //distance to center
+    vec2 center=vec2(u_resolution.x,u_resolution.y) / vec2(4., 2.);
+    vec2 FragCoord=mod(vec2(gl_FragCoord.x,gl_FragCoord.y),center.x*2.);
+
     float d=length(FragCoord-center);
     float time=u_time*10.;
-    if(d<center.x/2.46){
-        time = time + (PI/4.)*-sign(gl_FragCoord.x-u_resolution.x/2.);
-    }
-    if(d>center.x/1.52){
-        time = time + (PI/4.)*sign(gl_FragCoord.x-u_resolution.x/2.);
-    }
-    
-    if(d<center.x/1.5&&d>center.x/2.5){
-        vec2 point=FragCoord-center;
 
+    if(d<center.x/1.5&&d>center.x/2.5){
+        if (sign(sin(u_time/2.))>0.) {
+            // inflate
+            if(d<center.x/2.46||d>center.x/1.52){
+                time = time + (PI/4.)*sign(sin(u_time));
+            }
+        } else {
+            // move up down
+            if (d<center.x/2.46) {
+                time = time + (PI/4. * sign(FragCoord.y-u_resolution.y/2.))*sign(sin(u_time));
+            }
+            if (d>center.x/1.52) {
+                time = time + (PI/4. * sign(u_resolution.y/2.-FragCoord.y))*sign(sin(u_time));
+            }
+        }
+
+        vec2 point=FragCoord-center;
         float a=dot(point,vec2(sin(time),cos(time)));
         float b=dot(point,vec2(sin(time+PI/2.),cos(time+PI/2.)));
         
-        if(sign(a)==sign(b)){
+        if(sign(a)==sign(b))
             colour=vec3(.99,.77,.18);
-        }else{
+        else
             colour=vec3(0.,.22,.8);
-        }
     }
+
     gl_FragColor=vec4(colour,1.);
 }
 

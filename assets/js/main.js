@@ -23,8 +23,7 @@ Array.from(document.getElementsByClassName("flagLocale")).forEach(e => {
     }
 });
 
-var locale = "eng";
-if (sessionStorage.getItem('locale') != null) locale = sessionStorage.getItem('locale');
+var locale = (sessionStorage.getItem('locale') != null) ? sessionStorage.getItem('locale') : ((navigator.language == "fr" || navigator.userLanguage == "fr") ? "fra" : "eng");
 
 Array.from(document.getElementsByClassName(locale)).forEach(e => {
     e.style.display = "none";

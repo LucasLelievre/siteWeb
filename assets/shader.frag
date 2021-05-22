@@ -61,25 +61,27 @@ void colourMouse(){
 void opticalCircles1(){
     vec3 colour=vec3(0.5);
 
-    vec2 center=vec2(u_resolution.x,u_resolution.y) / vec2(4., 2.);
-    vec2 FragCoord=mod(vec2(gl_FragCoord.x,gl_FragCoord.y),center.x*2.);
+    vec2 center = u_resolution / vec2(4., 4.);
+    vec2 FragCoord = mod(gl_FragCoord.xy, center*2.);
 
-    float d=length(FragCoord-center);
+    float dist = length(FragCoord-center);
     float time=u_time*10.;
 
-    if(d<center.x/1.5&&d>center.x/2.5){
+    float minRes = (center.x >= center.y) ? center.y : center.x;
+
+    if(dist<minRes/1.5&&dist>minRes/2.5){
         if (sign(sin(u_time/2.))>0.) {
             // inflate
-            if(d<center.x/2.46||d>center.x/1.52){
+            if(dist<minRes/2.46||dist>minRes/1.52){
                 time = time + (PI/4.)*sign(sin(u_time));
             }
         } else {
             // move up down
-            if (d<center.x/2.46) {
-                time = time + (PI/4. * sign(FragCoord.y-u_resolution.y/2.))*sign(sin(u_time));
+            if (dist<minRes/2.46) {
+                time = time + (PI/4. * sign(FragCoord.y-minRes))*sign(sin(u_time));
             }
-            if (d>center.x/1.52) {
-                time = time + (PI/4. * sign(u_resolution.y/2.-FragCoord.y))*sign(sin(u_time));
+            if (dist>minRes/1.52) {
+                time = time + (PI/4. * sign(minRes-FragCoord.y))*sign(sin(u_time));
             }
         }
 
@@ -87,15 +89,18 @@ void opticalCircles1(){
         float a=dot(point,vec2(sin(time),cos(time)));
         float b=dot(point,vec2(sin(time+PI/2.),cos(time+PI/2.)));
         
-        if(sign(a)==sign(b))
-            colour=vec3(.99,.77,.18);
-        else
-            colour=vec3(0.,.22,.8);
+        if(sign(a)==sign(b)) {
+            //colour=vec3(.99,.77,.18);
+            colour = vec3(1.);
+        } else {
+            //colour=vec3(0.,.22,.8);
+            colour = vec3(0.);
+        }
     }
 
     gl_FragColor=vec4(colour,1.);
 }
 
 void main() {
-    opticalCircles1();
+    mandelbrotV2();
 }

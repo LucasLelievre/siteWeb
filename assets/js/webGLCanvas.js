@@ -20,6 +20,7 @@ function webGLCanvas() {
         //todo set mousePos to mouse pos
         window.addEventListener("mousemove", (e) => mouseMove(e), false);
     }
+    //var select = getShaderSelect();
 
     shaderProgram = initShader(glContext);
     initBuffer(glContext, shaderProgram);
@@ -46,7 +47,8 @@ function render(now) {
     // Fragment shaders input values
     glContext.uniform1f(glContext.getUniformLocation(shaderProgram, "u_time"), now*0.001);
     glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "u_resolution"), window.innerWidth, window.innerHeight);
-    glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "u_mouse"), mousePos[0], mousePos[1]);
+    glContext.uniform2fv(glContext.getUniformLocation(shaderProgram, "u_mouse"), mousePos);
+    glContext.uniform1i(glContext.getUniformLocation(shaderProgram, "u_select"), getShaderSelect());
 
     glContext.drawElements(glContext.TRIANGLES, indices.length, glContext.UNSIGNED_SHORT, 0);
 }
@@ -150,4 +152,12 @@ function initBuffer(glContext, shaderProgram) {
     glContext.vertexAttribPointer(coord, 3, glContext.FLOAT, false, 0, 0);
     // Enable the attribute
     glContext.enableVertexAttribArray(coord);
+}
+
+function getShaderSelect() {
+    document.cookie.split(';').forEach(element => {
+        if (element.split('=')[0] == "u_shaderSelect")
+            return element.split('=')[1];
+    });
+    return 0;
 }

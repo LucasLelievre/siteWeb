@@ -23,6 +23,12 @@ Array.from(document.getElementsByClassName("flagLocale")).forEach(e => {
     }
 });
 
+Array.from(document.getElementsByClassName("shaderButton")).forEach(e => {
+    e.onclick = function (event) {
+        document.cookie = "u_shaderSelect=" + e.id;
+    }
+});
+
 var locale = (sessionStorage.getItem('locale') != null) ? sessionStorage.getItem('locale') : ((navigator.language == "fr" || navigator.userLanguage == "fr") ? "fra" : "eng");
 
 Array.from(document.getElementsByClassName(locale)).forEach(e => {

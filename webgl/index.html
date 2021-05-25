@@ -72,13 +72,13 @@
     uniform vec2 u_mouse;
     uniform float u_time;
     uniform int u_select;
-    
+
     #define PI 3.1415
-    
+
     void defaultShader() {
         gl_FragColor = vec4(vec2(u_mouse/u_resolution.y), abs(sin(u_time)), 1.0);
     }
-    
+
     void mandelbrotV1(){
         vec2 FC=vec2(gl_FragCoord.xy);
         vec2 r=u_resolution;
@@ -105,7 +105,7 @@
         }
         //gl_FragColor = vec4(vec3(u_mouse.x/u_resolution.x), 1.0);
     }
-    
+
     void mandelbrotV2(){
         //vec2 m = (u_mouse-u_resolution/2.)/u_resolution.y;
         //m = vec2(m.x, (m.y)*-1.)*0.25;
@@ -127,11 +127,11 @@
             }
         }
     }
-    
+
     void colourMouse(){
         gl_FragColor=vec4(vec2(u_mouse/u_resolution.y),cos(u_time),1.);
     }
-    
+
     void opticalCircles1(){
         vec3 colour=vec3(.5);
         
@@ -173,7 +173,7 @@
         
         gl_FragColor=vec4(colour,1.);
     }
-    
+
     void main(){
         if(u_select==1) {
             mandelbrotV2();

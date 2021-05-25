@@ -155,9 +155,11 @@ function initBuffer(glContext, shaderProgram) {
 }
 
 function getShaderSelect() {
+    var select = 0;
     document.cookie.split(';').forEach(element => {
-        if (element.split('=')[0] == "u_shaderSelect")
-            return element.split('=')[1];
+        if (element.split('=')[0] == "u_shaderSelect") {
+            select = Number(element.split('=')[1]);
+        }
     });
-    return 0;
+    return select;
 }

@@ -29,6 +29,12 @@ Array.from(document.getElementsByClassName("shaderButton")).forEach(e => {
     }
 });
 
+Array.from(document.getElementsByClassName("closable")).forEach(e => {
+    e.onclick = function (event) {
+        e.remove();
+    }
+})
+
 var locale = (sessionStorage.getItem('locale') != null) ? sessionStorage.getItem('locale') : ((navigator.language == "fr" || navigator.userLanguage == "fr") ? "fra" : "eng");
 
 Array.from(document.getElementsByClassName(locale)).forEach(e => {

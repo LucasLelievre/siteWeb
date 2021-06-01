@@ -1,165 +1,168 @@
-//var oldTime = 0.0;
-//var deltaTime = 0.0;
+class webGLCanvas {
 
-function webGLCanvas() {
-    // the canvas that will be drawn on
-    canvas = document.querySelector("#glCanvas");
-    // GL context
-    glContext = canvas.getContext("webgl");
-    if (!glContext) {
-        alert("Unable to initialize WebGL. Your browser maybe too old.");
-        //TODO quelque chose pour les navigateurs trop vieux
-        return;
-    }
-    // set the canvas and viwport size to the window and add an event listener to resizeif needed
-    resizeViewport();
-    window.addEventListener("resize", resizeViewport);
-    // set the mouse position and listen to mouse movements
-    mousePos = [window.innerWidth/2, window.innerHeight/2];
-    if (isOnDesktop(navigator.userAgent||navigator.vendor||window.opera)) {
-        //todo set mousePos to mouse pos
-        window.addEventListener("mousemove", (e) => mouseMove(e), false);
-    }
-    //var select = getShaderSelect();
+    constructor() {}
 
-    shaderProgram = initShader(glContext);
-    initBuffer(glContext, shaderProgram);
+    init(vertSource, fragSource, select) {
 
-    
-    requestAnimationFrame(update);
-}
+        this.vertSource = vertSource;
+        this.fragSource = fragSource;
+        this.shaderSelect = select;
 
-function update(now) {
-    render(now);
-    //deltaTime = now - oldTime;
-    //oldTime = now;
-    requestAnimationFrame(update);
-}
-
-function render(now) {
-    glContext.clearColor(.0, .0, .0, .0);                 // Clear to black, fully opaque
-    glContext.clearDepth(1.0);                                // Clear everything
-    glContext.enable(glContext.DEPTH_TEST);         // Enable depth testing
-    glContext.depthFunc(glContext.LEQUAL);          // TODO what is this
-
-    glContext.clear(glContext.COLOR_BUFFER_BIT | glContext.DEPTH_BUFFER_BIT);
-
-    // Fragment shaders input values
-    glContext.uniform1f(glContext.getUniformLocation(shaderProgram, "u_time"), now*0.001);
-    glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "u_resolution"), window.innerWidth, window.innerHeight);
-    glContext.uniform2fv(glContext.getUniformLocation(shaderProgram, "u_mouse"), mousePos);
-    glContext.uniform1i(glContext.getUniformLocation(shaderProgram, "u_select"), getShaderSelect());
-
-    glContext.drawElements(glContext.TRIANGLES, indices.length, glContext.UNSIGNED_SHORT, 0);
-}
-
-function resizeViewport() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    glContext.viewport(0, 0, glContext.canvas.width, glContext.canvas.height);
-    //this.renderer.resize();
-}
-
-function mouseMove(e) {
-    mousePos = [e.clientX, e.clientY];
-    //glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "i_mouse"), e.clientX, e.clientY);
-}
-
-function initShader(glContext) {
-
-    const vertSource = document.getElementById("VERT_SOURCE").textContent;
-    const fragSource = document.getElementById("FRAG_SOURCE").textContent;
-
-    // Creating shader object
-    const vertShader = glContext.createShader(glContext.VERTEX_SHADER);
-    const fragShader = glContext.createShader(glContext.FRAGMENT_SHADER);
-
-    // Add source code to shader
-    glContext.shaderSource(vertShader, vertSource);
-    glContext.shaderSource(fragShader, fragSource);
-
-    // Compile the shader
-    glContext.compileShader(vertShader);
-    glContext.compileShader(fragShader);
-
-    // Alert if compilation failed
-    if (!glContext.getShaderParameter(vertShader, glContext.COMPILE_STATUS)) {
-        alert('An error occured compiling the vertex shader: ' + glContext.getShaderInfoLog(vertShader));
-        glContext.deleteShader(vertShader);
-        return null;
-    }
-    if (!glContext.getShaderParameter(fragShader, glContext.COMPILE_STATUS)) {
-        alert('An error occured compiling the fragment shader: ' + glContext.getShaderInfoLog(fragShader));
-        glContext.deleteShader(fragShader);
-        return null;
-    }
-
-    // Create shader programm
-    const shaderProgram = glContext.createProgram();
-
-    // Attach shaders to programm
-    glContext.attachShader(shaderProgram, vertShader);
-    glContext.attachShader(shaderProgram, fragShader);
-
-    // TODO what the fuck is this
-    glContext.linkProgram(shaderProgram);
-
-    // Alert if creation failed
-    if (!glContext.getProgramParameter(shaderProgram, glContext.LINK_STATUS)) {
-        alert('Unable to initialize the shader program: ' + glContext.getProgramInfoLog(shaderProgram));
-        return null;
-    }
-
-    glContext.useProgram(shaderProgram);
-    return shaderProgram
-}
-
-function initBuffer(glContext, shaderProgram) {
-    var vertices = [
-        -1., 1., 0.0,
-        -1., -1., 0.0,
-        1., -1., 0.0,
-        1., 1., 0.0
-    ];
-
-    indices = [3, 2, 1, 3, 1, 0];
-
-    // Create an empty buffer object to store vertex buffer
-    var vertex_buffer = glContext.createBuffer();
-    // Bind appropriate array buffer to it
-    glContext.bindBuffer(glContext.ARRAY_BUFFER, vertex_buffer);
-    // Pass the vertex data to the buffer
-    glContext.bufferData(glContext.ARRAY_BUFFER, new Float32Array(vertices), glContext.STATIC_DRAW);
-    // Unbind the buffer
-    glContext.bindBuffer(glContext.ARRAY_BUFFER, null);
-
-    // Create an empty buffer object to store Index buffer
-    var Index_Buffer = glContext.createBuffer();
-    // Bind appropriate array buffer to it
-    glContext.bindBuffer(glContext.ELEMENT_ARRAY_BUFFER, Index_Buffer);
-    // Pass the vertex data to the buffer
-    glContext.bufferData(glContext.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), glContext.STATIC_DRAW);
-    // Unbind the buffer
-    glContext.bindBuffer(glContext.ELEMENT_ARRAY_BUFFER, null);
-
-    // Bind vertex buffer object
-    glContext.bindBuffer(glContext.ARRAY_BUFFER, vertex_buffer);
-    // Bind index buffer object
-    glContext.bindBuffer(glContext.ELEMENT_ARRAY_BUFFER, Index_Buffer);
-    // Get the attribute location
-    var coord = glContext.getAttribLocation(shaderProgram, "coordinates");
-    // Point an attribute to the currently bound VBO
-    glContext.vertexAttribPointer(coord, 3, glContext.FLOAT, false, 0, 0);
-    // Enable the attribute
-    glContext.enableVertexAttribArray(coord);
-}
-
-function getShaderSelect() {
-    var select = 0;
-    document.cookie.split(';').forEach(element => {
-        if (element.split('=')[0] == "u_shaderSelect") {
-            select = Number(element.split('=')[1]);
+        // the canvas that will be drawn on
+        this.canvas = document.querySelector("#glCanvas");
+        // GL context
+        this.glContext = this.canvas.getContext("webgl");
+        
+        if (!this.glContext) {
+            alert("Unable to initialize WebGL. Your browser maybe too old.");
+            //TODO quelque chose pour les navigateurs trop vieux
+            return;
         }
-    });
-    return select;
+        // set the canvas and viwport size to the window and add an event listener to resize if needed
+        this.resizeViewport();
+        window.addEventListener("resize", this.resizeViewport.bind(this));
+
+        // set the mouse position and listen to mouse movements
+        this.mousePos = [window.innerWidth/2, window.innerHeight/2];
+        if (isOnDesktop(navigator.userAgent||navigator.vendor||window.opera)) {
+            //todo set mousePos to mouse pos
+            window.addEventListener("mousemove", (e) => this.mouseMove(e), false);
+        }
+
+        this.initShader();
+        this.initBuffer();
+
+        
+        requestAnimationFrame(this.update.bind(this));
+    }
+
+    update(now) {
+        this.render(now);
+        requestAnimationFrame(this.update.bind(this));
+    }
+
+    render(now) {
+        this.glContext.clearColor(.0, .0, .0, .0);                 // Clear to black, fully opaque
+        this.glContext.clearDepth(1.0);                                // Clear everything
+        this.glContext.enable(this.glContext.DEPTH_TEST);         // Enable depth testing
+        this.glContext.depthFunc(this.glContext.LEQUAL);          // TODO what is this
+
+        this.glContext.clear(this.glContext.COLOR_BUFFER_BIT | this.glContext.DEPTH_BUFFER_BIT);
+
+        // Fragment shaders input values
+        this.glContext.uniform1f(this.glContext.getUniformLocation(this.shaderProgram, "u_time"), now*0.001);
+        this.glContext.uniform2f(this.glContext.getUniformLocation(this.shaderProgram, "u_resolution"), window.innerWidth, window.innerHeight);
+        this.glContext.uniform2fv(this.glContext.getUniformLocation(this.shaderProgram, "u_mouse"), this.mousePos);
+        this.glContext.uniform1i(this.glContext.getUniformLocation(this.shaderProgram, "u_select"), this.getShaderSelect());
+
+        this.glContext.drawElements(this.glContext.TRIANGLES, this.indices.length, this.glContext.UNSIGNED_SHORT, 0);
+    }
+
+    resizeViewport() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        this.glContext.viewport(0, 0, this.glContext.canvas.width, this.glContext.canvas.height);
+        //this.renderer.resize();
+    }
+
+    mouseMove(e) {
+        this.mousePos = [e.clientX, e.clientY];
+        //glContext.uniform2f(glContext.getUniformLocation(shaderProgram, "i_mouse"), e.clientX, e.clientY);
+    }
+
+    initShader() {
+
+        //const vertSource = document.getElementById("VERT_SOURCE").textContent;
+        //const fragSource = document.getElementById("FRAG_SOURCE").textContent;
+
+        // Creating shader object
+        const vertShader = this.glContext.createShader(this.glContext.VERTEX_SHADER);
+        const fragShader = this.glContext.createShader(this.glContext.FRAGMENT_SHADER);
+
+        // Add source code to shader
+        this.glContext.shaderSource(vertShader, this.vertSource);
+        this.glContext.shaderSource(fragShader, this.fragSource);
+
+        // Compile the shader
+        this.glContext.compileShader(vertShader);
+        this.glContext.compileShader(fragShader);
+
+        // Alert if compilation failed
+        if (!this.glContext.getShaderParameter(vertShader, this.glContext.COMPILE_STATUS)) {
+            alert('An error occured compiling the vertex shader: ' + this.glContext.getShaderInfoLog(vertShader));
+            this.glContext.deleteShader(vertShader);
+            return null;
+        }
+        if (!this.glContext.getShaderParameter(fragShader, this.glContext.COMPILE_STATUS)) {
+            alert('An error occured compiling the fragment shader: ' + this.glContext.getShaderInfoLog(fragShader));
+            this.glContext.deleteShader(fragShader);
+            return null;
+        }
+
+        // Create shader programm
+        this.shaderProgram = this.glContext.createProgram();
+
+        // Attach shaders to programm
+        this.glContext.attachShader(this.shaderProgram, vertShader);
+        this.glContext.attachShader(this.shaderProgram, fragShader);
+
+        this.glContext.linkProgram(this.shaderProgram);
+
+        // Alert if creation failed
+        if (!this.glContext.getProgramParameter(this.shaderProgram, this.glContext.LINK_STATUS)) {
+            alert('Unable to initialize the shader program: ' + this.glContext.getProgramInfoLog(shaderProgram));
+            return null;
+        }
+
+        this.glContext.useProgram(this.shaderProgram);
+    }
+
+    initBuffer() {
+        this.vertices = [
+            -1., 1., 0.0,
+            -1., -1., 0.0,
+            1., -1., 0.0,
+            1., 1., 0.0
+        ];
+
+        this.indices = [3, 2, 1, 3, 1, 0];
+
+        // Create an empty buffer object to store vertex buffer
+        var vertex_buffer = this.glContext.createBuffer();
+        // Bind appropriate array buffer to it
+        this.glContext.bindBuffer(this.glContext.ARRAY_BUFFER, vertex_buffer);
+        // Pass the vertex data to the buffer
+        this.glContext.bufferData(this.glContext.ARRAY_BUFFER, new Float32Array(this.vertices), this.glContext.STATIC_DRAW);
+        // Unbind the buffer
+        this.glContext.bindBuffer(this.glContext.ARRAY_BUFFER, null);
+
+        // Create an empty buffer object to store Index buffer
+        var Index_Buffer = this.glContext.createBuffer();
+        // Bind appropriate array buffer to it
+        this.glContext.bindBuffer(this.glContext.ELEMENT_ARRAY_BUFFER, Index_Buffer);
+        // Pass the vertex data to the buffer
+        this.glContext.bufferData(this.glContext.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indices), this.glContext.STATIC_DRAW);
+        // Unbind the buffer
+        this.glContext.bindBuffer(this.glContext.ELEMENT_ARRAY_BUFFER, null);
+
+        // Bind vertex buffer object
+        this.glContext.bindBuffer(this.glContext.ARRAY_BUFFER, vertex_buffer);
+        // Bind index buffer object
+        this.glContext.bindBuffer(this.glContext.ELEMENT_ARRAY_BUFFER, Index_Buffer);
+        // Get the attribute location
+        var coord = this.glContext.getAttribLocation(this.shaderProgram, "coordinates");
+        // Point an attribute to the currently bound VBO
+        this.glContext.vertexAttribPointer(coord, 3, this.glContext.FLOAT, false, 0, 0);
+        // Enable the attribute
+        this.glContext.enableVertexAttribArray(coord);
+    }
+
+    getShaderSelect() {
+        document.cookie.split(';').forEach(element => {
+            if (element.split('=')[0] == "u_shaderSelect") {
+                this.shaderSelect = Number(element.split('=')[1]);
+            }
+        });
+        return this.shaderSelect;
+    }
 }

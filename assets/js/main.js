@@ -44,7 +44,7 @@ Array.from(document.getElementsByClassName("flagLocale")).forEach(e => {
 
 Array.from(document.getElementsByClassName("shaderButton")).forEach(e => {
     e.onclick = function (event) {
-        document.cookie = "u_shaderSelect=" + e.id;
+        canvas.setShaderSelect(e.id);
     }
 });
 

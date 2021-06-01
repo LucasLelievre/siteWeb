@@ -53,7 +53,7 @@ class webGLCanvas {
         this.glContext.uniform1f(this.glContext.getUniformLocation(this.shaderProgram, "u_time"), now*0.001);
         this.glContext.uniform2f(this.glContext.getUniformLocation(this.shaderProgram, "u_resolution"), window.innerWidth, window.innerHeight);
         this.glContext.uniform2fv(this.glContext.getUniformLocation(this.shaderProgram, "u_mouse"), this.mousePos);
-        this.glContext.uniform1i(this.glContext.getUniformLocation(this.shaderProgram, "u_select"), this.getShaderSelect());
+        this.glContext.uniform1i(this.glContext.getUniformLocation(this.shaderProgram, "u_select"), this.shaderSelect);
 
         this.glContext.drawElements(this.glContext.TRIANGLES, this.indices.length, this.glContext.UNSIGNED_SHORT, 0);
     }
@@ -157,12 +157,7 @@ class webGLCanvas {
         this.glContext.enableVertexAttribArray(coord);
     }
 
-    getShaderSelect() {
-        document.cookie.split(';').forEach(element => {
-            if (element.split('=')[0] == "u_shaderSelect") {
-                this.shaderSelect = Number(element.split('=')[1]);
-            }
-        });
-        return this.shaderSelect;
+    setShaderSelect(select) {
+        this.shaderSelect = select;
     }
 }

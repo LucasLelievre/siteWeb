@@ -17,6 +17,18 @@ function loadFile(url) {
     });
 }
 
+function setCanvasShader(vertexSource, fragmentSource) {
+    Promise.all([
+        loadFile(vertexSource),
+        loadFile(fragmentSource)
+    ]).then(function (values) {
+        console.log("shader files successfully loaded");
+        canvas.init(values[0], values[1]);
+    }).catch(function (reason) {
+        console.error(reason);
+    });
+}
+
 var canvas = new webGLCanvas();
 
 Array.from(document.getElementsByClassName("menuButton")).forEach(e => {
@@ -44,7 +56,7 @@ Array.from(document.getElementsByClassName("flagLocale")).forEach(e => {
 
 Array.from(document.getElementsByClassName("shaderButton")).forEach(e => {
     e.onclick = function (event) {
-        canvas.setShaderSelect(e.id);
+        setCanvasShader("/assets/shaders/shader.vert", "/assets/shaders/"+e.id+".frag");
     }
 });
 
@@ -60,14 +72,4 @@ Array.from(document.getElementsByClassName(locale)).forEach(e => {
     e.style.display = "none";
 });
 
-window.onload = function () {
-    Promise.all([
-        loadFile("/assets/shaders/shader.vert", canvas.setVertexShader),
-        loadFile("/assets/shaders/shader.frag", canvas.setFragmentShader)
-    ]).then(function (values) {
-        console.log("shader files successfully loaded");
-        canvas.init(values[0], values[1], 1);
-    }).catch(function (reason) {
-        console.error(reason);
-    });
-}
+window.onload = setCanvasShader("/assets/shaders/shader.vert", "/assets/shaders/mandelbrot.frag");

@@ -2,11 +2,10 @@ class webGLCanvas {
 
     constructor() {}
 
-    init(vertSource, fragSource, select) {
+    init(vertSource, fragSource) {
 
         this.vertSource = vertSource;
         this.fragSource = fragSource;
-        this.shaderSelect = select;
 
         // the canvas that will be drawn on
         this.canvas = document.querySelector("#glCanvas");
@@ -53,7 +52,6 @@ class webGLCanvas {
         this.glContext.uniform1f(this.glContext.getUniformLocation(this.shaderProgram, "u_time"), now*0.001);
         this.glContext.uniform2f(this.glContext.getUniformLocation(this.shaderProgram, "u_resolution"), window.innerWidth, window.innerHeight);
         this.glContext.uniform2fv(this.glContext.getUniformLocation(this.shaderProgram, "u_mouse"), this.mousePos);
-        this.glContext.uniform1i(this.glContext.getUniformLocation(this.shaderProgram, "u_select"), this.shaderSelect);
 
         this.glContext.drawElements(this.glContext.TRIANGLES, this.indices.length, this.glContext.UNSIGNED_SHORT, 0);
     }
@@ -155,9 +153,5 @@ class webGLCanvas {
         this.glContext.vertexAttribPointer(coord, 3, this.glContext.FLOAT, false, 0, 0);
         // Enable the attribute
         this.glContext.enableVertexAttribArray(coord);
-    }
-
-    setShaderSelect(select) {
-        this.shaderSelect = select;
     }
 }

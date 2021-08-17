@@ -9,9 +9,12 @@ a {
 
 .section {
     text-align: center;
-    padding: 5%;
+    padding: 3%;
     font-size: 1.5em;
     font-family: CODEbold, 'monospace';
+}
+.sectionThin{
+    padding-bottom: 0px;
 }
 
 .whiteBox {
@@ -25,6 +28,16 @@ a {
     margin-bottom: 1em;
 }
 
+.searchBox {
+    width: 50%;
+    height: 2em;
+    padding: 5px;
+    border-radius: 5px;
+    border-width: 0px;
+    font-family: UbuntuRegular, 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
 .logo {
     margin: auto;
     margin-bottom: 0.25em;
@@ -35,4 +48,9 @@ a {
 @font-face {
     font-family: CODEbold;
     src: url(fonts/CODE\ Bold.otf);
+}
+
+@font-face {
+    font-family: UbuntuRegular;
+    src: url(fonts/ubuntu.regular.ttf);
 }

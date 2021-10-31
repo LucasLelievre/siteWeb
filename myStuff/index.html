@@ -29,9 +29,13 @@
 
 <script>
     function clickPress(e){
-        var value = document.getElementById("searchBox").value.replaceAll(" ", "+");
-        if (e.keyCode == 13 && value != "") {
-            location.href = "https://duckduckgo.com/?q=" + document.getElementById("searchBox").value;
+        var search = document.getElementById("searchBox").value;
+        if (e.keyCode == 13 && search != "") {
+            if (/(^[a-zA-Z]+)([.][a-z]+)+$/.test(search)) {
+                location.href = "https://" + search;
+            } else {
+                location.href = "https://duckduckgo.com/?q=" + search;
+            }
         }
     }
 </script>

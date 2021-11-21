@@ -32,10 +32,10 @@
     function clickPress(e){
         var search = document.getElementById("searchBox").value;
         if (e.keyCode == 13 && search != "") {
-            if (/(^[a-zA-Z]+)([.][a-z]+)+$/.test(search)) {
+            if (/(^[a-zA-Z]+)([.][a-z]+)+(\/.*)*$/.test(search)) {
                 location.href = "https://" + search;
             } else {
-                location.href = "https://duckduckgo.com/?q=" + search;
+                location.href = "https://duckduckgo.com/?q=" + encodeURIComponent(search);
             }
         }
     }

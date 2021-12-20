@@ -25,6 +25,7 @@ a {
     /* justify-items: center; */
 }
 .card {
+    display: block;
     background-color: white;
     padding: 0.5em;
     border-radius: 5px;
@@ -39,6 +40,23 @@ a {
     font-family: UbuntuR;
     text-transform: uppercase;
     text-align: center;
+}
+
+.drop-content {
+    display: none;
+    position: absolute;
+}
+.drop-content .card {
+    display: block;
+    margin-top: 1em;
+    width: 7em;
+}
+.drop-hover:hover .drop-content {
+    display: block;
+}
+.card:hover {
+    box-shadow: 0 0 20px 10px rgba(128,0,128,1);
+    transition: 0.2s;
 }
 
 @font-face {

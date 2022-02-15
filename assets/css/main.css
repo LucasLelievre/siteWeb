@@ -22,6 +22,8 @@ canvas {
 }
 h1 {
     font-family: CODElight;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 a {
     color: black;
@@ -59,8 +61,17 @@ a {
 .icon {
     height: 0.7em;
     width: auto;
-    margin-left: 3px;
+    /* margin-left: 3px; */
 }
+h1 .icon {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+/* h1 img.icon {
+    background-color: #000;
+    border-color: #000;
+    border-width: 3px;
+} */
 .flag {
     height: 1.3em;
 }

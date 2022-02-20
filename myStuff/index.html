@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pouet Pouet</title>
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon-196.png">
+    <link rel="shortcut icon" href="../assets/img/favicon.svg"/>
     <link rel="stylesheet" href="assets/main.css">
 </head>
 
 <body>
-    <input type='text' id='searchBox' class="searchBox" onkeypress="clickPress(event)" autofocus>
+    <input type='text' id='searchBox' class="searchBox" onkeypress="clickPress(event)">
 
     <div class="responsiveGrid">
         <a class="card" href="https://youtube.com">
@@ -99,6 +99,11 @@
                 location.href = "https://duckduckgo.com/?q=" + encodeURIComponent(search);
             }
         }
+    }
+
+    window.onkeydown = function(event) {
+        if (document.getElementById("searchBox") === document.activeElement) return;
+        document.getElementById("searchBox").focus();
     }
 </script>
 

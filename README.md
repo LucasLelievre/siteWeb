@@ -1,7 +1,10 @@
 # siteWeb
 
+Just my personal website, check it out here :
+[lucaslelievre.com](https://www.lucaslelievre.com)
+
+Mandelbrot Fractal :
 http://nuclear.mutantstargoat.com/articles/sdr_fract/
 
-python3 -m http.server 1337
-
+Nantes Université Dashboard :
 https://github.com/thomaslprr/MasterInfoDashboard

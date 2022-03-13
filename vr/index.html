@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script src="https://aframe.io/releases/1.3.0/aframe.js"></script>
+<script src="https://lucaslelievre.com/utils/objectDifference.js"></script>
+<script src="./assets/js/prb_material.js"></script>
+
+<body>
+    <a-scene background="color:#300" stats>
+        <a-assets>
+            <!-- Bottle model -->
+            <a-asset-item id="bottle" src="assets/models/WaterBottle.glb"></a-asset-item>
+
+            <!-- wood flooring -->
+            <img id="wood_src" src="assets/textures/older_wood_flooring/albedo.png" type="src">
+            <img id="wood_ao" src="assets/textures/older_wood_flooring/ao.png" type="ao">
+            <img id="wood_m" src="assets/textures/older_wood_flooring/metallic.png" type="metalness">
+            <img id="wood_n" src="assets/textures/older_wood_flooring/normal.png" type="normal">
+            <img id="wood_r" src="assets/textures/older_wood_flooring/roughness.png" type="roughness">
+
+            <!-- rough brick -->
+            <img id="brick_src" src="assets/textures/rough_brick/albedo.png" type="src">
+            <img id="brick_ao" src="assets/textures/rough_brick/ao.png" type="ao">
+            <img id="brick_m" src="assets/textures/rough_brick/metallic.png" type="metalness">
+            <img id="brick_n" src="assets/textures/rough_brick/normal.png" type="normal">
+            <img id="brick_r" src="assets/textures/rough_brick/roughness.png" type="roughness">
+
+            <!-- rough plaster -->
+            <img id="plaster_src" src="assets/textures/rough_plaster/albedo.png" type="src">
+            <img id="plaster_ao" src="assets/textures/rough_plaster/ao.png" type="ao">
+            <img id="plaster_m" src="assets/textures/rough_plaster/metallic.png" type="metalness">
+            <img id="plaster_n" src="assets/textures/rough_plaster/normal.png" type="normal">
+            <img id="plaster_r" src="assets/textures/rough_plaster/roughness.png" type="roughness">
+
+            <!-- lined cement -->
+            <img id="cement_src" src="assets/textures/lined_cement/albedo.png" type="src">
+            <img id="cement_ao" src="assets/textures/lined_cement/ao.png" type="ao">
+            <img id="cement_m" src="assets/textures/lined_cement/metallic.png" type="metalness">
+            <img id="cement_n" src="assets/textures/lined_cement/normal.png" type="normal">
+            <img id="cement_r" src="assets/textures/lined_cement/roughness.png" type="roughness">
+
+            <!-- white tile -->
+            <img id="white_tile_src" src="assets/textures/base_white_tile/albedo.png" type="src">
+            <img id="white_tile_ao" src="assets/textures/base_white_tile/ao.png" type="ao">
+            <img id="white_tile_m" src="assets/textures/base_white_tile/metallic.png" type="metalness">
+            <img id="white_tile_n" src="assets/textures/base_white_tile/normal.png" type="normal">
+            <img id="white_tile_r" src="assets/textures/base_white_tile/roughness.png" type="roughness">
+
+            <!-- steelplate -->
+            <img id="steelplate_src" src="assets/textures/steelplate/albedo.png" type="src">
+            <img id="steelplate_ao" src="assets/textures/steelplate/ao.png" type="ao">
+            <img id="steelplate_m" src="assets/textures/steelplate/metallic.png" type="metalness">
+            <img id="steelplate_n" src="assets/textures/steelplate/normal.png" type="normal">
+            <img id="steelplate_r" src="assets/textures/steelplate/roughness.png" type="roughness">
+        </a-assets>
+        <a-plane position="0 0 0" rotation="-90 0 0" width="5" height="5" shadow="receive: true" set_pbr="wood"
+            repeat="2 2">
+        </a-plane>
+
+        <a-plane position="0 1.5 -2.5" rotation="0 0 0" width="5" height="3" shadow="receive: true" set_pbr="brick"
+            repeat="2 1.2">
+        </a-plane>
+        <a-plane position="-2.5 1.5 0" rotation="0 90 0" width="5" height="3" shadow="receive: true" set_pbr="brick"
+            repeat="2 1.2">
+        </a-plane>
+        <a-plane position="0 1.5 2.5" rotation="0 180 0" width="5" height="3" shadow="receive: true" set_pbr="brick"
+            repeat="2 1.2">
+        </a-plane>
+        <a-plane position="2.5 1.5 0" rotation="0 -90 0" width="5" height="3" shadow="receive: true" set_pbr="brick"
+            repeat="2 1.2">
+        </a-plane>
+
+        <a-plane position="0 3 0" rotation="90 0 0" width="5" height="5" shadow="receive: true" set_pbr="plaster"
+            repeat="2 2">
+        </a-plane>
+
+        <a-entity position="0 0 -1" rotation="0 0 0"
+            animation="property: rotation; to: 0 -360 0; dur: 5000; easing: linear; loop: true">
+            <a-box position="-1 0 0" shadow="cast: true" set_pbr="cement">
+            </a-box>
+            <a-box position="0.3 0 0.7" shadow="cast: true" set_pbr="white_tile">
+            </a-box>
+            <a-box position="0.3 0 -0.7" shadow="cast: true" set_pbr="steelplate">
+            </a-box>
+        </a-entity>
+
+        <a-entity position="0 1 -1" rotation="0 0 0"
+            animation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true">
+            <a-entity light="type:point; castShadow: true; color: #FFF" position="1 0 0" intensity="1"></a-entity>
+            <a-box position="1 0 0" width="0.1" height="0.1" depth="0.1"></a-box>
+            <a-entity light="type:point; castShadow: true; color: #F00" position="-0.3 0 0.7" intensity="1"></a-entity>
+            <a-box position="-0.3 0 0.7" width="0.1" height="0.1" depth="0.1"></a-box>
+            <a-entity light="type:point; castShadow: true; color: #00F" position="-0.3 0 -0.7" intensity="1"></a-entity>
+            <a-box position="-0.3 0 -0.7" width="0.1" height="0.1" depth="0.1"></a-box>
+        </a-entity>
+
+        <a-entity gltf-model="#bottle" position="0 1 -1"></a-entity>
+
+        <a-light type="ambient" color="#333"></a-light>
+
+        <a-entity text="font: dejavu; value: Pouet Pouet; width:5; align: center; wrapCount:20" position="0 2.5 -2.5">
+        </a-entity>
+
+    </a-scene>
+</body>
+
+</html>

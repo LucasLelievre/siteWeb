@@ -17,10 +17,10 @@ AFRAME.registerComponent('set_pbr', {
         this.el.setAttribute('material', {
             shader: 'standard',
             src: document.querySelector(selector+'_src'),
-            ambientOcclusionMap: document.querySelector(selector+'_ao'),
-            metalnessMap: document.querySelector(selector+'_m'),
             normalMap: document.querySelector(selector+'_n'),
-            roughnessMap: document.querySelector(selector+'_r'),
+            ambientOcclusionMap: document.querySelector(selector+'_pbr'),
+            metalnessMap: document.querySelector(selector+'_pbr'),
+            roughnessMap: document.querySelector(selector+'_pbr'),
             metalness: 0.5,
             roughness: 1
         });

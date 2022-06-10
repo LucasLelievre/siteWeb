@@ -41,7 +41,7 @@
                     <div class="cardTitle">gmail 13</div>
                 </a>
                 <a class="card" href="https://mail.protonmail.com/u/0/">
-                    <img src="https://protonmail.com/images/media/logos/protonmail-sign-dark.png" alt="protonMail">
+                    <img src="assets/img/protonmail.svg" alt="protonMail">
                     <div class="cardTitle">proton</div>
                 </a>
             </div>
@@ -93,8 +93,8 @@
     function clickPress(e){
         var search = document.getElementById("searchBox").value;
         if (e.keyCode == 13 && search != "") {
-            if (/(^[a-zA-Z]+)([.][a-z]+)+(\/.*)*$/.test(search)) {
-                location.href = "https://" + search;
+            if (/^[a-zA-Z0-9]+([.][a-zA-Z0-9]+)+(\/.*)/.test(search)) {
+                location.href = "https://www." + search;
             } else {
                 location.href = "https://duckduckgo.com/?q=" + encodeURIComponent(search);
             }

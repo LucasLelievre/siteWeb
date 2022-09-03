@@ -1,82 +1,125 @@
 @font-face {
-    font-family: CODEbold;
-    src: url(../fonts/CODE\ Bold.otf);
+    font-family: 'NaturalMonoAltRegular';
+    src: url('fonts/NaturalMonoAltRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
-@font-face {
-    font-family: CODElight;
-    src: url(../fonts/CODE\ Light.otf);
+
+@media(prefers-color-scheme: dark) {
+    :root {
+        --background: #000;
+        --foreground: #FFF;
+        --accent: #3749e6;
+    }
 }
 
 body {
-    width: 100%;
-    height: 100%;
-    background-color: black;
     margin: 0px;
-    border: 0;
-    /* overflow: hidden; */
-    display: block;
-    /* position: relative; */
+    font-family: NaturalMonoAltRegular;
+    background-color: var(--background);
+    color: var(--foreground);
 }
+
 canvas {
     position: absolute;
-}
-h1 {
-    font-family: CODElight;
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-a {
-    color: black;
-    text-decoration: none;
-    width: fit-content;
+    top: 0px;
 }
 
-.locale {
-    display: inline-block;
-}
-.whiteBox {
-    display: inline-block;
-    background-color: white;
-    width: fit-content;
-    padding: 5px;
-    padding-bottom: 0px;
-    border-radius: 5px;
-    margin-right: 1em;
-    margin-bottom: 1em;
-}
-.menu {
-    z-index: 1;
+.container {
     position: relative;
-    padding: 5%;
-    font-size: 1.5em;
-    font-family: CODEbold, 'monospace';
-}
-.unclickable {
-    cursor: default;
-    user-select: none;
-}
-.menuContent {
-    display: none;
-}
-.icon {
-    height: 0.7em;
-    width: auto;
-    /* margin-left: 3px; */
-}
-h1 .icon {
-    margin-right: 5px;
-    margin-left: 5px;
-}
-/* h1 img.icon {
-    background-color: #000;
-    border-color: #000;
-    border-width: 3px;
-} */
-.flag {
-    height: 1.3em;
+    z-index: 1;
+    margin: 5%;
+    max-width: 800px;
 }
 
-#mail {
-    font-family: monospace;
-    font-weight: bold;
+h1 {
+    width: fit-content;
+    border-top: 0.1em solid var(--foreground);
+    border-bottom: 0.1em solid var(--foreground);
+}
+
+h1 a {
+    display: flex;
+}
+
+a {
+    color: var(--foreground);
+    text-decoration: none;
+}
+
+#logo {
+    margin-top: 0.2em;
+    margin-right: 0.2em;
+    height: 2em;
+
+}
+
+.navButt {
+    background-color: var(--accent);
+    padding: 0.2em 0.2em 0.1em;
+}
+
+p {
+    text-align: justify;
+    padding: 0.2em;
+    background-color: #00000088;
+}
+
+#settings {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+#settings img {
+    background-color: var(--accent);
+    border: 5px solid var(--accent);
+    border-radius: 50%;
+}
+
+.icon {
+    height: 2em;
+    vertical-align: middle;
+    margin-right: 1em;
+}
+
+/* Projects */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
+    gap: 1em 3em;
+}
+
+.grid a {
+    background-color: var(--foreground);
+    color: var(--background);
+    text-align: center;
+    padding: 0.3em;
+    border: 0.2em solid var(--foreground);
+}
+.grid a:hover {
+    border: 0.2em solid var(--accent);
+}
+
+.grid a img {
+    height: 8ch;
+    max-width: 8ch;
+}
+
+/* Dashboard */
+.dashboard {
+    margin: 5%;
+}
+#searchbar {
+    margin-bottom: 2em;
+    max-width: 90%;
+    width: 40em;
+    height: 1.5em;
+    font-family: NaturalMonoAltRegular;
+
+    border-radius: 0px;
+    border: 2px solid var(--foreground);
+}
+#searchbar:focus{
+    outline: 0.2em solid var(--accent);
 }

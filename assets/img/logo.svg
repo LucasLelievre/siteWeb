@@ -5,9 +5,14 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <style>
-        rect, circle {
-            fill:#000;
-        }
+      rect, circle {
+         fill:#000;
+      }
+      @media(prefers-color-scheme: dark) {
+         rect, circle {
+               fill:#fff;
+         }
+      }
    </style>
   <rect
      width="40"

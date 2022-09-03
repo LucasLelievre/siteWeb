@@ -1,66 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lucas Lelièvre</title>
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="shortcut icon" href="assets/img/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/img/favicon.svg"/>
+    <link rel="stylesheet" href="/assets/css/main.css">
 </head>
-
 <body>
     <canvas id="glCanvas"></canvas>
-    <div class="menu">
-        <h1 class="whiteBox unclickable"><img src="assets/img/logo.svg" alt="logo" class="icon">Lucas Lelièvre</h1>
-        <div class="menuSection">
-            <a href="#" class="whiteBox menuButton">
-                <div class="fra locale">Projets</div>
-                <div class="eng locale">Projects</div>
+
+    <div class="container">
+        <h1>
+            <a href="/">
+                <img src="/assets/img/logo.svg" alt="logo" id="logo">
+                LUCAS<br>LELIÈVRE
             </a>
-            <a href="webgl" class="whiteBox menuContent">WebGL Shaders</a>
-            <a href="vr" class="whiteBox menuContent">WebXR VR</a>
-            <a href="https://github.com/LucasLelievre" target="_blank" class="whiteBox menuContent">
-                github
-                <img src="assets/fonts/open_iconic/external-link.svg" alt="external-link" class="icon">
-            </a>
+        </h1>
+        <div class="nav">
+            <span class="navButt"><a href="/assets/LucasLelievreCV.pdf" target="_blank">CV</a></span>
+            <span class="navButt"><a href="/projects">PROJECTS</a></span>
+            <span class="navButt"><a href="/contact">CONTACT</a></span>
         </div>
-        <div class="menuSection">
-            <a href="#" class="whiteBox menuButton">
-                <div class="fra locale">CV</div>
-                <div class="eng locale">Resume</div>
-            </a>
-            <a href="assets/LucasLelievreCV.pdf" target="_blank" class="whiteBox menuContent">
-                <div class="fra locale">télécharger</div>
-                <div class="eng locale">download</div>
-                <img src="assets/fonts/open_iconic/data-transfer-download.svg" alt="mail icon" class="icon">
-            </a>
-        </div>
-        <div class="menuSection">
-            <a href="#" class="whiteBox menuButton">Contact</a>
-            <a href="mailto:lelievre.lucas13@gmail.com" class="whiteBox menuContent" id="mail">
-                lelievre.lucas13@gmail.com
-                <img src="assets/fonts/open_iconic/envelope-closed.svg" alt="envelope-closed" class="icon">
-            </a>
-            <a href="https://www.linkedin.com/in/lucaslelievre/" target="_blank" class="whiteBox menuContent"
-                id="linkedin">
-                linkedin
-                <img src="assets/fonts/open_iconic/external-link.svg" alt="external-link" class="icon">
-            </a>
-        </div>
-        <div class="menuSection">
-            <a href="#" class="whiteBox flagLocale locale eng" id="eng">
-                <img src="assets/fonts/openmoji/uk.svg" alt="english" class="flag" id="engFlag">
-            </a>
-            <a href="#" class="whiteBox flagLocale locale fra" id="fra">
-                <img src="assets/fonts/openmoji/fr.svg" alt="français" class="flag" id="fraFlag">
-            </a>
-        </div>
+        <p class="description">
+            Currently in my last year of a computer science master's degree in Nantes University, where I study Visual Computing.
+            I am looking for an internship in computer graphics that will be 6 months long.
+            Curious and motivated, I enjoy learning new things and solving problems. 
+        </p>
+        <a href="./" id="settings">
+            <img src="/assets/img/power.svg" alt="⏻">
+        </a>
     </div>
+
+    <script src="/assets/js/simpleWebGLCanvas.js"></script>
+    <script src="/assets/js/shaders.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>
-
-<script src="assets/js/webGLCanvas.js"></script>
-<script src="assets/js/main.js"></script>
-
 </html>

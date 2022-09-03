@@ -1,6 +1,8 @@
 class webGLCanvas {
 
-    constructor() {}
+    constructor() {
+        this.play = true;
+    }
 
     init(vertSource, fragSource) {
 
@@ -13,9 +15,8 @@ class webGLCanvas {
         this.glContext = this.canvas.getContext("webgl");
         
         if (!this.glContext) {
-            alert("Unable to initialize WebGL. Your browser maybe too old.");
-            //TODO quelque chose pour les navigateurs trop vieux
-            return;
+            console.error("Unable to initialize WebGL. Your browser maybe too old.");
+            return null;
         }
         // set the canvas and viwport size to the window and add an event listener to resize if needed
         this.resizeViewport();
@@ -28,15 +29,15 @@ class webGLCanvas {
             window.addEventListener("mousemove", (e) => this.mouseMove(e), false);
         }
 
-        this.initShader();
-        this.initBuffer();
+        if (!this.initShader()) return null;
+        if (!this.initBuffer()) return null;
 
         
         requestAnimationFrame(this.update.bind(this));
     }
 
     update(now) {
-        this.render(now);
+        if (this.play) this.render(now);
         requestAnimationFrame(this.update.bind(this));
     }
 
@@ -87,12 +88,12 @@ class webGLCanvas {
 
         // Alert if compilation failed
         if (!this.glContext.getShaderParameter(vertShader, this.glContext.COMPILE_STATUS)) {
-            alert('An error occured compiling the vertex shader: ' + this.glContext.getShaderInfoLog(vertShader));
+            console.error('An error occured compiling the vertex shader: ' + this.glContext.getShaderInfoLog(vertShader));
             this.glContext.deleteShader(vertShader);
             return null;
         }
         if (!this.glContext.getShaderParameter(fragShader, this.glContext.COMPILE_STATUS)) {
-            alert('An error occured compiling the fragment shader: ' + this.glContext.getShaderInfoLog(fragShader));
+            console.error('An error occured compiling the fragment shader: ' + this.glContext.getShaderInfoLog(fragShader));
             this.glContext.deleteShader(fragShader);
             return null;
         }
@@ -108,11 +109,13 @@ class webGLCanvas {
 
         // Alert if creation failed
         if (!this.glContext.getProgramParameter(this.shaderProgram, this.glContext.LINK_STATUS)) {
-            alert('Unable to initialize the shader program: ' + this.glContext.getProgramInfoLog(shaderProgram));
+            console.error('Unable to initialize the shader program: ' + this.glContext.getProgramInfoLog(shaderProgram));
             return null;
         }
 
         this.glContext.useProgram(this.shaderProgram);
+
+        return 1;
     }
 
     initBuffer() {
@@ -153,5 +156,7 @@ class webGLCanvas {
         this.glContext.vertexAttribPointer(coord, 3, this.glContext.FLOAT, false, 0, 0);
         // Enable the attribute
         this.glContext.enableVertexAttribArray(coord);
+
+        return 1;
     }
 }

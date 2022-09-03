@@ -2,6 +2,9 @@ class webGLCanvas {
 
     constructor() {
         this.play = true;
+        this.lastrender = 0;
+        this.step = 32;
+        this.time = 0;
     }
 
     init(vertSource, fragSource) {
@@ -37,7 +40,11 @@ class webGLCanvas {
     }
 
     update(now) {
-        if (this.play) this.render(now);
+        if (this.play && now > (this.lastrender+this.step)) {
+            this.render(now);
+            this.lastrender = now;
+            this.time += this.step;
+        }
         requestAnimationFrame(this.update.bind(this));
     }
 
@@ -50,7 +57,7 @@ class webGLCanvas {
         this.glContext.clear(this.glContext.COLOR_BUFFER_BIT | this.glContext.DEPTH_BUFFER_BIT);
 
         // Fragment shaders input values
-        this.glContext.uniform1f(this.glContext.getUniformLocation(this.shaderProgram, "u_time"), now*0.001);
+        this.glContext.uniform1f(this.glContext.getUniformLocation(this.shaderProgram, "u_time"), this.time*0.001);
         this.glContext.uniform2f(this.glContext.getUniformLocation(this.shaderProgram, "u_resolution"), window.innerWidth, window.innerHeight);
         this.glContext.uniform2fv(this.glContext.getUniformLocation(this.shaderProgram, "u_mouse"), this.mousePos);
 

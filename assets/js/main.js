@@ -3,11 +3,20 @@ function isOnDesktop(a) { return !(/(android|bb\d+|meego).+mobile|avantgo|bada\/
 function setShader(frag_shader) {
     let canvas = new webGLCanvas();
     let res = canvas.init(vert_basic, frag_shader);
+    
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) canvas.darkmode = true;
+    else canvas.darkmode = false;
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => setDarkmode(e, canvas));
+
     if (res) document.querySelector("#glCanvas").style.display = "none";
     else document.querySelector("#glCanvas").style.display = "block";
     return canvas;
 }
 
+function setDarkmode(e, canvas) {
+    if (e.matches) canvas.darkmode = true;
+    else canvas.darkmode = false;
+}
 
 window.addEventListener('load', (event) => {
     "use strict"
@@ -30,12 +39,8 @@ window.addEventListener('load', (event) => {
             canvas = setShader(shaders[event.target.id]);
         });
     });
+
+
     
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
-        if (e.matches) {
-            canvas.darkmode = true;
-        } else {
-            canvas.darkmode = false;
-        }
-    });
+    
 });

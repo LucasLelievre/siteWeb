@@ -5,6 +5,7 @@ class webGLCanvas {
         this.lastrender = 0;
         this.step = 32;
         this.time = 0;
+        this.darkmode = false;
     }
 
     init(vertSource, fragSource) {
@@ -60,6 +61,7 @@ class webGLCanvas {
         this.glContext.uniform1f(this.glContext.getUniformLocation(this.shaderProgram, "u_time"), this.time*0.001);
         this.glContext.uniform2f(this.glContext.getUniformLocation(this.shaderProgram, "u_resolution"), window.innerWidth, window.innerHeight);
         this.glContext.uniform2fv(this.glContext.getUniformLocation(this.shaderProgram, "u_mouse"), this.mousePos);
+        this.glContext.uniform1i(this.glContext.getUniformLocation(this.shaderProgram, "u_darkmode"), this.darkmode);
 
         this.glContext.drawElements(this.glContext.TRIANGLES, this.indices.length, this.glContext.UNSIGNED_SHORT, 0);
     }
@@ -93,17 +95,18 @@ class webGLCanvas {
         this.glContext.compileShader(vertShader);
         this.glContext.compileShader(fragShader);
 
-        // Alert if compilation failed
-        if (!this.glContext.getShaderParameter(vertShader, this.glContext.COMPILE_STATUS)) {
-            console.error('An error occured compiling the vertex shader: ' + this.glContext.getShaderInfoLog(vertShader));
-            this.glContext.deleteShader(vertShader);
-            return null;
-        }
-        if (!this.glContext.getShaderParameter(fragShader, this.glContext.COMPILE_STATUS)) {
-            console.error('An error occured compiling the fragment shader: ' + this.glContext.getShaderInfoLog(fragShader));
-            this.glContext.deleteShader(fragShader);
-            return null;
-        }
+        // Best pratices : only test link status, then print compilation status
+        // if compilation failed
+        // if (!this.glContext.getShaderParameter(vertShader, this.glContext.COMPILE_STATUS)) {
+        //     console.error('An error occured compiling the vertex shader: ' + this.glContext.getShaderInfoLog(vertShader));
+        //     this.glContext.deleteShader(vertShader);
+        //     return null;
+        // }
+        // if (!this.glContext.getShaderParameter(fragShader, this.glContext.COMPILE_STATUS)) {
+        //     console.error('An error occured compiling the fragment shader: ' + this.glContext.getShaderInfoLog(fragShader));
+        //     this.glContext.deleteShader(fragShader);
+        //     return null;
+        // }
 
         // Create shader programm
         this.shaderProgram = this.glContext.createProgram();
@@ -116,7 +119,9 @@ class webGLCanvas {
 
         // Alert if creation failed
         if (!this.glContext.getProgramParameter(this.shaderProgram, this.glContext.LINK_STATUS)) {
-            console.error('Unable to initialize the shader program: ' + this.glContext.getProgramInfoLog(shaderProgram));
+            console.error('Unable to initialize the shader program: ' + this.glContext.getProgramInfoLog(this.shaderProgram));
+            console.error('vertex shader status: ' + this.glContext.getShaderInfoLog(vertShader));
+            console.error('fragment shader status: ' + this.glContext.getShaderInfoLog(fragShader));
             return null;
         }
 

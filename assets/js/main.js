@@ -30,4 +30,12 @@ window.addEventListener('load', (event) => {
             canvas = setShader(shaders[event.target.id]);
         });
     });
+    
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+        if (e.matches) {
+            canvas.darkmode = true;
+        } else {
+            canvas.darkmode = false;
+        }
+    });
 });

@@ -7,7 +7,7 @@ document.querySelector("#searchbar").addEventListener('keypress', (event) => {
         let val = document.querySelector("#searchbar").value;
         if (val != "") {
             if (/^(https?:\/\/)?([\w]+\.)(\.?[\w]{2,})+(\/\S+)?$/.test(val)) {
-                location.href = val;
+                location.href = /^https?:\/\//.test(val) ? val : "https://"+val;
             } else {
                 location.href = "https://duckduckgo.com/?q=" + encodeURIComponent(val);
             }

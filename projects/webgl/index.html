@@ -12,25 +12,31 @@
     <canvas id="glCanvas"></canvas>
 
     <div class="container">
-        <h1>
-            <a href="/">
-                <img src="/assets/img/logo.svg" alt="logo" id="logo">
-                LUCAS<br>LELIÈVRE
-            </a>
-        </h1>
-        <div class="nav">
-            <span class="navButt"><a href="/assets/LucasLelievreCV.pdf" target="_blank">CV</a></span>
-            <span class="navButt"><a href="/projects">PROJECTS</a></span>
-            <span class="navButt"><a href="/contact">CONTACT</a></span>
-        </div>
-        <p class="grid">
-            <a href="" class="webgl_button" id="mandlebrot">Mandlebrot Fractale</a>
-            <a href="" class="webgl_button" id="opt1">Optical illusion 1</a>
-            <a href="" class="webgl_button" id="opt2">Optical illusion 2</a>
-        </p>
-        <a href="./" id="settings">
-            <img src="/assets/img/power.svg" alt="⏻">
-        </a>
+        <header>
+            <h1>
+                <a href="/">
+                    <img src="/assets/img/logo.svg" alt="logo" id="logo">
+                    LUCAS<br>LELIÈVRE
+                </a>
+            </h1>
+            <nav>
+                <menu id="nav">
+                    <li class="navButt"><a href="/assets/LucasLelievreCV.pdf" target="_blank">CV</a></li>
+                    <li class="navButt"><a href="/projects">PROJECTS</a></li>
+                    <li class="navButt"><a href="/contact">CONTACT</a></li>
+                </menu>
+            </nav>
+            <button id="settings">
+                <img src="/assets/img/power.svg" alt="stop">
+            </button>
+        </header>
+        <main>
+            <section class="grid">
+                <a href="" class="webgl_button" id="mandlebrot">Mandlebrot Fractale</a>
+                <a href="" class="webgl_button" id="opt1">Optical illusion 1</a>
+                <a href="" class="webgl_button" id="opt2">Optical illusion 2</a>
+            </section>
+        </main>
     </div>
 
     <script src="/assets/js/simpleWebGLCanvas.js"></script>

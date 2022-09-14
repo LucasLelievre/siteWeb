@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Some projects I have worked on, adapted for the web, or simply some things I have learned about.">
     <title>Lucas Lelièvre</title>
     <link rel="shortcut icon" href="/assets/img/favicon.svg"/>
     <link rel="stylesheet" href="/assets/css/main.css">
@@ -12,29 +13,36 @@
     <canvas id="glCanvas"></canvas>
 
     <div class="container">
-        <h1>
-            <a href="/">
-                <img src="/assets/img/logo.svg" alt="logo" id="logo">
-                LUCAS<br>LELIÈVRE
+        <header>
+            <h1>
+                <a href="/">
+                    <img src="/assets/img/logo.svg" alt="logo" id="logo">
+                    LUCAS<br>LELIÈVRE
+                </a>
+            </h1>
+            <nav>
+                <menu id="nav">
+                    <li class="navButt"><a href="/assets/LucasLelievreCV.pdf" target="_blank">CV</a></li>
+                    <li class="navButt"><a href="/projects">PROJECTS</a></li>
+                    <li class="navButt"><a href="/contact">CONTACT</a></li>
+                </menu>
+            </nav>
+            <button id="settings">
+                <img src="/assets/img/power.svg" alt="stop">
+            </button>
+        </header>
+        <main>
+            <section class="grid">
+                <a href="webgl/" class="link">WebGL shaders</a>
+                <a href="vr/" class="link">Aframe WebXR</a>
+            </section>
+            <br>
+            <a href="https://www.github.com/LucasLelievre" target="_blank">
+                <img src="https://github.githubassets.com/favicons/favicon-dark.svg" alt="Github:" class="icon dark">
+                <img src="https://github.githubassets.com/favicons/favicon.svg" alt="Github:" class="icon light">
+                github.com/LucasLelievre
             </a>
-        </h1>
-        <div class="nav">
-            <span class="navButt"><a href="/assets/LucasLelievreCV.pdf" target="_blank">CV</a></span>
-            <span class="navButt"><a href="/projects">PROJECTS</a></span>
-            <span class="navButt"><a href="/contact">CONTACT</a></span>
-        </div>
-        <p class="grid">
-            <a href="webgl/" class="link">WebGL shaders</a>
-            <a href="vr/" class="link">Aframe WebXR</a>
-        </p>
-        <a href="https://www.github.com/LucasLelievre" target="_blank">
-            <img src="https://github.githubassets.com/favicons/favicon-dark.svg" alt="Github:" class="icon dark">
-            <img src="https://github.githubassets.com/favicons/favicon.svg" alt="Github:" class="icon light">
-            github.com/LucasLelievre
-        </a>
-        <a href="./" id="settings">
-            <img src="/assets/img/power.svg" alt="⏻">
-        </a>
+        </main>
     </div>
 
     <script src="/assets/js/simpleWebGLCanvas.js"></script>

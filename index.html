@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lucas Lelièvre, student in Computer Science. Currently in my last year of a computer science master's degree in Nantes University, where I study Visual Computing. I am looking for an internship in computer graphics that will be 6 months long. Curious and motivated, I enjoy learning new things and solving problems. Computer graphics, real time rendering, openGL, WebGL, GLSL, HLSL">
     <title>Lucas Lelièvre</title>
     <link rel="shortcut icon" href="/assets/img/favicon.svg"/>
     <link rel="stylesheet" href="/assets/css/main.css">
@@ -12,25 +13,31 @@
     <canvas id="glCanvas"></canvas>
 
     <div class="container">
-        <h1>
-            <a href="/">
-                <img src="/assets/img/logo.svg" alt="logo" id="logo">
-                LUCAS<br>LELIÈVRE
-            </a>
-        </h1>
-        <div class="nav">
-            <span class="navButt"><a href="/assets/LucasLelievreCV.pdf" target="_blank">CV</a></span>
-            <span class="navButt"><a href="/projects">PROJECTS</a></span>
-            <span class="navButt"><a href="/contact">CONTACT</a></span>
-        </div>
-        <p class="description">
+        <header>
+            <h1>
+                <a href="/">
+                    <img src="/assets/img/logo.svg" alt="logo" id="logo">
+                    LUCAS<br>LELIÈVRE
+                </a>
+            </h1>
+            <nav>
+                <menu id="nav">
+                    <li class="navButt"><a href="/assets/LucasLelievreCV.pdf" target="_blank">CV</a></li>
+                    <li class="navButt"><a href="/projects">PROJECTS</a></li>
+                    <li class="navButt"><a href="/contact">CONTACT</a></li>
+                </menu>
+            </nav>
+            <button id="settings">
+                <img src="/assets/img/power.svg" alt="stop">
+            </button>
+        </header>
+        <main>
             Currently in my last year of a computer science master's degree in Nantes University, where I study Visual Computing.
             I am looking for an internship in computer graphics that will be 6 months long.
-            Curious and motivated, I enjoy learning new things and solving problems. 
-        </p>
-        <a href="./" id="settings">
-            <img src="/assets/img/power.svg" alt="⏻">
-        </a>
+            Curious and motivated, I enjoy learning new things and solving problems.
+        </main>
+        
+        
     </div>
 
     <script src="/assets/js/simpleWebGLCanvas.js"></script>

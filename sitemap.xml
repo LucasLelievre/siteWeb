@@ -5,15 +5,15 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.lucaslelievre.com/projects</loc>
+    <loc>https://www.lucaslelievre.com/projects/</loc>
   </url>
   <url>
-    <loc>https://www.lucaslelievre.com/projects/webgl</loc>
+    <loc>https://www.lucaslelievre.com/projects/webgl/</loc>
   </url>
   <url>
-    <loc>https://www.lucaslelievre.com/projects/vr</loc>
+    <loc>https://www.lucaslelievre.com/projects/vr/</loc>
   </url>
   <url>
-    <loc>https://www.lucaslelievre.com/contact</loc>
+    <loc>https://www.lucaslelievre.com/contact/</loc>
   </url>
 </urlset>

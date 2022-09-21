@@ -1,5 +1,4 @@
 User-agent: *
-Allow: /*.html
-Allow: /*/*.html
 Disallow: /assets/*
+
 Sitemap: https://www.lucaslelievre.com/sitemap.xml

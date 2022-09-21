@@ -1,1 +1,4 @@
-siteWeb.zip
+cgi-bin/
+.well-known/
+.user.ini
+php.ini

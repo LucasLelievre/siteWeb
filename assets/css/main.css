@@ -32,7 +32,7 @@
 
 body {
     margin: 0px;
-    font-family: NaturalMonoAltRegular;
+    font-family: NaturalMonoAltRegular, monospace, sans-serif;
     background-color: var(--background);
     color: var(--text);
 }
@@ -152,7 +152,7 @@ button {
     max-width: 90%;
     width: 40em;
     height: 1.5em;
-    font-family: NaturalMonoAltRegular;
+    font-family: NaturalMonoAltRegular, monospace, sans-serif;
 
     border-radius: 0px;
     border: 2px solid var(--foreground);

@@ -117,6 +117,7 @@ button {
 
 /* Projects */
 .grid {
+    margin-bottom: 1em;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
     gap: 1em 3em;
@@ -149,8 +150,7 @@ button {
 }
 #searchbar {
     margin-bottom: 2em;
-    max-width: 90%;
-    width: 40em;
+    width: calc(100% - 8px);
     height: 1.5em;
     font-family: NaturalMonoAltRegular, monospace, sans-serif;
 

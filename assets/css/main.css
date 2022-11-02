@@ -9,7 +9,7 @@
     :root {
         --background: #000;
         --background-st: #0008;
-        --foreground: #FFF;
+        --foreground: #FFF4;
         --text: #FFF;
         --accent: #3749e6;
     }
@@ -21,7 +21,7 @@
     :root {
         --background: #FFF;
         --background-st: #FFF8;
-        --foreground: #222;
+        --foreground: #0004;
         --text: #000;
         --accent: #f28c26;
     }
@@ -51,8 +51,8 @@ canvas {
 
 h1 {
     width: fit-content;
-    border-top: 0.1em solid var(--foreground);
-    border-bottom: 0.1em solid var(--foreground);
+    border-top: 0.1em solid var(--text);
+    border-bottom: 0.1em solid var(--text);
 }
 
 h1 a {
@@ -125,10 +125,10 @@ button {
 
 .grid a {
     background-color: var(--foreground);
-    color: var(--background);
     text-align: center;
     padding: 0.3em;
-    border: 0.2em solid var(--foreground);
+    border: 0.2em solid var(--background);
+    border-radius: 10px;
 }
 .grid a:hover {
     border: 0.2em solid var(--accent);
@@ -150,13 +150,15 @@ button {
 }
 #searchbar {
     margin-bottom: 2em;
+    padding: 0.4em;
     width: calc(100% - 8px);
     height: 1.5em;
     font-family: NaturalMonoAltRegular, monospace, sans-serif;
 
-    border-radius: 0px;
-    border: 2px solid var(--foreground);
+    border-radius: 10px;
+    border: 0.2em solid var(--foreground);
 }
 #searchbar:focus{
-    outline: 0.2em solid var(--accent);
+    outline: 0.4em solid var(--accent);
+    border: 0.2em solid var(--accent);
 }

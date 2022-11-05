@@ -140,7 +140,8 @@ button {
 }
 
 /* Contact */
-.contacts li {
+/* .contacts li { */
+li {
     margin-bottom: 0.5em;
 }
 
